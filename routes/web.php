@@ -1,52 +1,62 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\JobPostController;
-use App\Http\Controllers\Admin\AdmitCardController;
-use App\Http\Controllers\Admin\AnswerKeyController;
-use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Frontend Routes
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
-Route::get('/search', [JobController::class, 'search'])->name('jobs.search');
-Route::get('/categories', [JobController::class, 'categories'])->name('categories');
-Route::get('/jobs/{category}', [JobController::class, 'category'])->name('jobs.category');
-Route::get('/job/{jobPost}', [JobController::class, 'show'])->name('jobs.show');
-Route::get('/admit-cards', [JobController::class, 'admitCards'])->name('admit-cards');
-Route::get('/answer-keys', [JobController::class, 'answerKeys'])->name('answer-keys');
-Route::get('/latest-jobs', [JobController::class, 'latestJobs'])->name('latest-jobs');
-Route::get('/results', [JobController::class, 'results'])->name('results');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(array_filter(['auth', config('mail.verification.required', true) ? 'verified' : null]))->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-// Admin Routes
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
-    Route::resource('categories', CategoryController::class);
-    Route::resource('job-posts', JobPostController::class);
-    Route::resource('admit-cards', AdmitCardController::class);
-    Route::resource('answer-keys', AnswerKeyController::class);
-    
-    // Admin Profile Routes
-    Route::get('/profile', [AdminProfileController::class, 'show'])->name('profile.show');
-    Route::get('/profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
-    Route::get('/profile/password', [AdminProfileController::class, 'editPassword'])->name('profile.password');
-    Route::put('/profile/password', [AdminProfileController::class, 'updatePassword'])->name('profile.password.update');
+// Category pages
+Route::get('/jobs', function () {
+    return view('pages.jobs');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/results', function () {
+    return view('pages.results');
+});
+
+Route::get('/admit-cards', function () {
+    return view('pages.admit-cards');
+});
+
+Route::get('/admissions', function () {
+    return view('pages.admissions');
+});
+
+Route::get('/answer-keys', function () {
+    return view('pages.answer-keys');
+});
+
+Route::get('/syllabus', function () {
+    return view('pages.syllabus');
+});
+
+Route::get('/sarkari-yojana', function () {
+    return view('pages.sarkari-yojana');
+});
+
+// Static pages
+Route::get('/about', function () {
+    return view('pages.about');
+});
+
+Route::get('/contact', function () {
+    return view('pages.contact');
+});
+
+Route::get('/privacy-policy', function () {
+    return view('pages.privacy-policy');
+});
+
+Route::get('/disclaimer', function () {
+    return view('pages.disclaimer');
+});
+
+Route::get('/terms', function () {
+    return view('pages.terms');
+});
+
+// Regular forms
+Route::get('/regular-form', function () {
+    return view('pages.regular-form');
+});

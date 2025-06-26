@@ -13,19 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create admin user
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@sarkariresult.com',
-            'role' => 'admin',
-            'password' => bcrypt('SecureAdmin@2025'),
-            'email_verified_at' => now(),
-        ]);
+        // User::factory(10)->create();
 
-        // Run other seeders
-        $this->call([
-            CategorySeeder::class,
-            JobPostSeeder::class,
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
         ]);
     }
 }

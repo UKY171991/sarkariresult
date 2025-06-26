@@ -115,19 +115,4 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification
-    |--------------------------------------------------------------------------
-    |
-    | This option controls whether email verification is required for new
-    | user registrations. Set to false in local development to bypass
-    | email verification requirements.
-    |
-    */
-
-    'verification' => [
-        'required' => env('MAIL_VERIFICATION_REQUIRED', true),
-    ],
-
 ];
