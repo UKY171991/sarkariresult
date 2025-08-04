@@ -4,7 +4,7 @@ define('DB_PATH', __DIR__ . '/../database/sarkariresult.db');
 
 // Site configuration
 define('SITE_NAME', 'Sarkari Result');
-define('SITE_URL', 'http://localhost/sarkariresult');
+define('SITE_URL', 'http://localhost:8000');
 define('SITE_DESCRIPTION', 'Find Latest Sarkari Job Vacancies And Sarkari Exam Results');
 
 // Database connection
