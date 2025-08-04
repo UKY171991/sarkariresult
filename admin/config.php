@@ -5,7 +5,7 @@ session_start();
 require_once __DIR__ . '/../includes/config.php';
 
 // Admin configuration
-define('ADMIN_URL', 'https://job.codeapka.com/admin');
+define('ADMIN_URL', 'http://localhost:8000/admin');
 define('ADMIN_TITLE', 'Sarkari Result - Admin Panel');
 
 // Check if user is logged in
