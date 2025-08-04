@@ -24,24 +24,6 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <!-- Top Bar -->
-        <div class="top-bar">
-            <div class="container">
-                <div class="top-bar-content">
-                    <div class="contact-info">
-                        <span><i class="fas fa-envelope"></i> info@sarkariresult.com.cm</span>
-                        <span><i class="fas fa-phone"></i> +91-XXXXXXXXXX</span>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Main Header -->
         <div class="main-header">
             <div class="container">
@@ -73,11 +55,16 @@
         <!-- Navigation -->
         <nav class="navigation">
             <div class="container">
-                <ul class="nav-menu">
-                    <?php foreach($nav_menu as $title => $url): ?>
-                        <li><a href="<?php echo $url; ?>" <?php echo (basename($_SERVER['PHP_SELF']) == $url) ? 'class="active"' : ''; ?>><?php echo $title; ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
+                <div class="nav-content">
+                    <div class="nav-logo">
+                        <img src="assets/images/logo.svg" alt="Sarkari Result Logo" class="nav-logo-img">
+                    </div>
+                    <ul class="nav-menu">
+                        <?php foreach($nav_menu as $title => $url): ?>
+                            <li><a href="<?php echo $url; ?>" <?php echo (basename($_SERVER['PHP_SELF']) == $url) ? 'class="active"' : ''; ?>><?php echo $title; ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
