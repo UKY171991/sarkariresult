@@ -1,27 +1,11 @@
 RewriteEngine On
-
-# Handle admin directory access
 DirectoryIndex index.php
 
-# Redirect admin without trailing slash to with trailing slash
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} ^/admin$
-RewriteRule ^(.*)$ %{REQUEST_URI}/ [R=301,L]
-
-# Handle admin root access
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^$ index.php [L]
 
-# Protect sensitive files
 <Files "config.php">
     Order allow,deny
     Deny from all
 </Files>
-
-# Security headers
-<IfModule mod_headers.c>
-    Header always set X-Content-Type-Options nosniff
-    Header always set X-Frame-Options DENY
-    Header always set X-XSS-Protection "1; mode=block"
-</IfModule>
