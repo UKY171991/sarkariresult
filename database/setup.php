@@ -11,7 +11,17 @@ echo "Starting SQLite database setup...\n";
 
 try {
     // Connect to SQLite database (will create if not exists)
-    $db = getDBConnection();
+    $dbDir = dirname(DB_PATH);
+    if (!is_dir($dbDir)) {
+        mkdir($dbDir, 0755, true);
+    }
+    
+    $db = new PDO("sqlite:" . DB_PATH);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    
+    // Enable foreign key constraints
+    $db->exec("PRAGMA foreign_keys = ON");
     
     // Read the SQL setup file
     $sqlFile = __DIR__ . '/setup_sqlite.sql';
