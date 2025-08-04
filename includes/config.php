@@ -1,10 +1,13 @@
 <?php
+// Environment detection
+require_once __DIR__ . '/environment.php';
+
 // Database configuration for SQLite
 define('DB_PATH', __DIR__ . '/../database/sarkariresult.db');
 
 // Site configuration
 define('SITE_NAME', 'Sarkari Result');
-define('SITE_URL', 'http://localhost:8000');
+define('SITE_URL', BASE_URL);
 define('SITE_DESCRIPTION', 'Find Latest Sarkari Job Vacancies And Sarkari Exam Results');
 
 // Database connection
@@ -15,6 +18,12 @@ try {
         mkdir($dbDir, 0755, true);
     }
     
+    // Ensure database file is writable
+    if (!file_exists(DB_PATH)) {
+        touch(DB_PATH);
+        chmod(DB_PATH, 0666);
+    }
+    
     $pdo = new PDO("sqlite:" . DB_PATH);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
@@ -23,8 +32,8 @@ try {
     $pdo->exec("PRAGMA foreign_keys = ON");
     
 } catch(PDOException $e) {
-    // For development - in production, log this instead
-    // die("Connection failed: " . $e->getMessage());
+    // Log error in production
+    error_log("Database connection failed: " . $e->getMessage());
     $pdo = null; // Continue without database for now
 }
 
