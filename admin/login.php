@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
-  <!-- Theme style -->
+  <!-- AdminLTE 3 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
   
   <style>
@@ -69,35 +69,238 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       min-height: 100vh;
     }
     .login-box {
-      width: 400px;
+      width: 360px;
+      margin: auto;
+      padding-top: 5%;
     }
     .card {
       border: none;
       border-radius: 15px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.95);
     }
     .card-header {
       background: transparent;
       border-bottom: none;
       text-align: center;
-      padding: 2rem 2rem 0;
+      padding: 2rem 1.5rem 1rem;
     }
-    .login-logo {
-      font-size: 2.5rem;
+    .login-logo a {
+      font-size: 2.2rem;
       font-weight: 700;
       color: #2c3e50;
-      margin-bottom: 1rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    .login-subtitle {
-      color: #6c757d;
-      font-size: 0.95rem;
-      margin-bottom: 0;
+    .login-logo img {
+      height: 45px;
+      width: auto;
     }
-    .card-body {
-      padding: 2rem;
+    .login-card-body {
+      padding: 1.5rem 2rem 2rem;
+    }
+    .input-group {
+      margin-bottom: 1.5rem;
     }
     .form-control {
       border-radius: 10px;
+      border: 1px solid #e0e6ed;
+      padding: 12px 15px;
+      font-size: 0.95rem;
+      height: auto;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    .input-group-text {
+      border-radius: 10px 0 0 10px;
+      border: 1px solid #e0e6ed;
+      background: #f8f9fa;
+      color: #6c757d;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    .alert {
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 1rem;
+    }
+    .alert-danger {
+      background: rgba(220, 53, 69, 0.1);
+      color: #dc3545;
+      border: 1px solid rgba(220, 53, 69, 0.2);
+    }
+    .icheck-primary {
+      margin: 1rem 0;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e9ecef;
+    }
+    .back-link a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .back-link a:hover {
+      color: #764ba2;
+      text-decoration: none;
+    }
+    .forgot-password {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .forgot-password a {
+      color: #6c757d;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .forgot-password a:hover {
+      color: #667eea;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- Logo -->
+  <div class="login-logo">
+    <a href="../index.php">
+      <i class="fas fa-user-shield"></i>
+      <b>Sarkari</b>Result
+    </a>
+  </div>
+  
+  <!-- Login Card -->
+  <div class="card card-outline">
+    <div class="card-header text-center">
+      <h4 class="mb-1">Admin Panel</h4>
+      <p class="text-muted mb-0">Sign in to your admin account</p>
+    </div>
+    <div class="card-body login-card-body">
+      <?php if (isset($error_message)): ?>
+      <div class="alert alert-danger" role="alert">
+        <i class="fas fa-exclamation-triangle mr-2"></i><?php echo $error_message; ?>
+      </div>
+      <?php endif; ?>
+
+      <form action="" method="post" class="needs-validation" novalidate>
+        <div class="input-group">
+          <input type="text" 
+                 class="form-control" 
+                 name="username" 
+                 placeholder="Username or Email"
+                 value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>"
+                 required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <input type="password" 
+                 class="form-control" 
+                 name="password" 
+                 placeholder="Password"
+                 required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember" name="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="forgot-password">
+        <a href="forgot-password.php">
+          <i class="fas fa-key mr-1"></i>Forgot your password?
+        </a>
+      </div>
+
+      <div class="back-link">
+        <a href="../index.php">
+          <i class="fas fa-arrow-left mr-2"></i>Back to Website
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Form validation
+    $('.needs-validation').on('submit', function(e) {
+        if (this.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        $(this).addClass('was-validated');
+    });
+
+    // Auto-hide alerts after 5 seconds
+    setTimeout(function() {
+        $('.alert').fadeOut('slow');
+    }, 5000);
+
+    // Focus on first input
+    $('input[name="username"]').focus();
+
+    // Loading state on form submission
+    $('form').on('submit', function() {
+        const btn = $(this).find('button[type="submit"]');
+        btn.html('<i class="fas fa-spinner fa-spin mr-2"></i>Signing in...');
+        btn.prop('disabled', true);
+    });
+});
+</script>
+</body>
+</html>
       border: 1px solid #e0e6ed;
       padding: 12px 15px;
       font-size: 0.95rem;
