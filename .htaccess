@@ -1,15 +1,25 @@
 RewriteEngine On
 DirectoryIndex index.php
 
+# Admin panel routing
 RewriteCond %{REQUEST_URI} ^/admin/?$
-RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^admin/?$ admin/index.php [L]
 
+RewriteCond %{REQUEST_URI} ^/admin/(.+)$
+RewriteRule ^admin/(.+)$ admin/$1 [L]
+
+# General PHP file routing
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^.]+)$ $1.php [L]
 
+# Security
 <FilesMatch "\.(db|sql)$">
     Order allow,deny
     Deny from all
 </FilesMatch>
+
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
