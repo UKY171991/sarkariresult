@@ -19,6 +19,9 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block"><a href="/" class="nav-link">Site</a></li>
     </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+    </ul>
   </nav>
   <!-- Sidebar -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">

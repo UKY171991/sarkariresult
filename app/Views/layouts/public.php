@@ -21,6 +21,32 @@
       <div class="small">Latest Jobs • Results • Admit Cards</div>
     </div>
   </header>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background:#b22222">
+    <div class="container">
+      <a class="navbar-brand d-lg-none" href="#">Menu</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/exam-result">Exam Result</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/admit-card">Admit Card</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/top-online-form">Top Online Form</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/answer-keys">Answer Keys</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/syllabus">Syllabus</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/admission-form">Admission Form</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/document-verification">Documents Verification</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/diploma-iti">Diploma / ITI</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/b-tech-m-tech">B.Tech / M.Tech</a></li>
+          <li class="nav-item"><a class="nav-link" href="/category/hot-job">Hot Job</a></li>
+        </ul>
+        <div class="d-flex">
+          <a class="btn btn-outline-light btn-sm" href="/admin">Admin</a>
+        </div>
+      </div>
+    </div>
+  </nav>
   <main class="container mb-5">
     <?= $this->renderSection('content') ?>
   </main>

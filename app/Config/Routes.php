@@ -6,9 +6,14 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+$routes->match(['get','post'], 'login', 'Auth::login');
+$routes->get('logout', 'Auth::logout');
 
-// Admin Routes
-$routes->group('admin', static function ($routes) {
+// Category listing (mirror SarkariExam top menu slugs)
+$routes->get('category/(:segment)', 'Category::index/$1');
+
+// Admin Routes (protected)
+$routes->group('admin', ['filter' => 'auth'], static function ($routes) {
 	$routes->get('/', 'Admin\\Dashboard::index');
 	$routes->get('posts', 'Admin\\Posts::index');
 	$routes->match(['get','post'], 'posts/create', 'Admin\\Posts::create');
