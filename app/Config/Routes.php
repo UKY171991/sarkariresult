@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->match(['get','post'], 'login', 'Auth::login');
 $routes->get('logout', 'Auth::logout');
+$routes->match(['get','post'], 'register', 'Auth::register');
 
 // Category listing (mirror SarkariExam top menu slugs)
 $routes->get('category/(:segment)', 'Category::index/$1');
