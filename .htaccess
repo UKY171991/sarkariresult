@@ -1,0 +1,21 @@
+# Root-level fallback for hosts that cannot point DocumentRoot to /public
+# Prefer pointing your web server to the /public folder and delete this file.
+
+<IfModule mod_rewrite.c>
+    Options -Indexes
+    RewriteEngine On
+
+    # If the request is for an existing file or directory in root, serve it
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Otherwise route everything to /public
+    RewriteRule ^ public/$1 [L]
+</IfModule>
+
+# When mod_rewrite is not available, fall back to public/index.php directly
+<IfModule !mod_rewrite.c>
+    DirectoryIndex public/index.php
+    ErrorDocument 404 /public/index.php
+</IfModule>
